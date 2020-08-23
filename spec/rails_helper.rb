@@ -29,6 +29,19 @@ RSpec.configure do |config|
   config.include Shoulda::Matchers::ActiveModel, type: :model
   config.include Mongoid::Matchers, type: :model
 
+  config.include FactoryBot::Syntax::Methods
+
+  config.use_transactional_fixtures = false
+
+  config.before :each do
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.start
+  end
+
+  config.after do
+    DatabaseCleaner.clean
+  end
+  
 
   # Remove this line to enable support for ActiveRecord
   config.use_active_record = false
