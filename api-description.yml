@@ -1,0 +1,182 @@
+openapi: 3.0.0
+info:
+  description: |
+    This is a Complaints API from Trustvox
+  version: "1.0.0"
+  title: Trustvox - Complaints API
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: jpsneto1@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+# Added by API Auto Mocking Plugin
+  - url: 'https://trustvoxapp.herokuapp.com/api/v1'
+    description: API Staging enviroment
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/jpsneto/trustvox-complaints-api/1.0.0
+  
+tags:
+  - name: complaints
+    description: Complaints data
+    externalDocs:
+      description: Find out more
+      url: 'https://trustvoxapp.herokuapp.com'
+
+paths:
+  /complaints:
+    get:
+      tags:
+        - complaints
+      summary: Retrive all complaints
+      operationId: retriveAllComplaints
+      responses:
+        '200':
+          description: Retrive all complaints. Page size is 25 by default
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Complaint'
+    post:
+      tags:
+        - complaints
+      summary: Create a complaint
+      operationId: createComplaint
+      responses:
+        '405':
+          description: Invalid input
+      security:
+        - petstore_auth:
+            - 'write:pets'
+            - 'read:pets'
+      requestBody:
+        $ref: '#/components/requestBodies/Complaint'
+  /complaints/{id}:
+    get:
+      tags:
+        - complaints
+      summary: Retrive all complaints
+      operationId: retriveComplaintById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string      
+      responses:
+        '200':
+          description: Retrive complaint by Id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Complaint'    
+    put:
+      tags:
+        - complaints
+      summary: Update an existing complaint
+      operationId: updateComplaint
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string      
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Complaint not found
+        '405':
+          description: Validation exception
+      security:
+        - petstore_auth:
+            - 'write:pets'
+            - 'read:pets'
+      requestBody:
+        $ref: '#/components/requestBodies/Complaint'
+    delete:
+      tags:
+        - complaints
+      summary: Delete complaint
+      description: This can only be done by the logged in user.
+      operationId: deleteComplaint
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        400:
+          description: Invalid complaint id supplied
+        404:
+          description: Complaint not found
+   
+externalDocs:
+  description: Find out more about Trustvox Complaints
+  url: 'http://trustvoxapp.herokuapp.com'
+components:
+  schemas:
+    Complaint:
+      type: object
+      required:
+        - title
+        - description
+        - company
+        - locale
+      properties:
+        title:
+          type: string
+          example: Sem Sinal wifi e Televisão
+        description: 
+          type: string
+          example: Faz dias que o serviço Net, contratado não funciona. Os canais de TV caem, instáveis o tempo todo. Ficamos sem o serviço várias vezes por dia. A rede wifi, também, não corresponde
+        company:
+          type: string
+          example: Rede
+        locale:
+          $ref: "#/components/schemas/Locale"
+    Locale:
+      type: object
+      required:
+        - city
+        - state
+      properties:
+        city:
+          type: string
+          example: Ilhéus
+        state:
+          type: string
+          example: BA
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+  requestBodies:
+    Complaint:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Complaint'
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'http://petstore.swagger.io/oauth/dialog'
+          scopes:
+            'write:pets': modify pets in your account
+            'read:pets': read your pets
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
