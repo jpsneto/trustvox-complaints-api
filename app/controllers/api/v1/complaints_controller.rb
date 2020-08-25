@@ -1,46 +1,53 @@
 module Api::V1
   class ComplaintsController < BaseController
     before_action :set_complaint, only: [:show, :update, :destroy]
-    
-    # GET /complaints
+
     def index
-      @complaints = Complaint.all
-
-      render json: @complaints
+      @complaints = Complaint.all.page(params[:page])
+      render_object(@complaints)
     end
-    
-    # GET /complaints/1
+
     def show
-      render json: @complaint
+      render_object(@complaint)
     end
 
-    # POST /complaints
+    # Counts search result
+    # Example:
+    # Request: /api/v1/complaints/count?q[company]=Submarino&q[locale.state=BA]&q[locale.city]=Salvador
+    # Response: { data: 5 }
+    # e.g Five Submarino complaints in Salvador, BA
+    def count
+      @complaints = Complaint.where(search_params)
+      render json: {data: @complaints.count}
+    end
+
     def create
       @complaint = Complaint.new(complaint_params)
 
       if @complaint.save
-        render json: @complaint, status: :created
+        render_object(@complaint, status: :created)
       else
-        render json: @complaint.errors, status: :unprocessable_entity
+        render_errors(@complaint.errors)
       end
-
     end
 
-    # PATCH/PUT ap1/v1/complaints/complaints/1
     def update
       if @complaint.update(complaint_params)
-        render json: @complaint
+        render_object(@complaint)
       else
-        render json: @complaint.errors, status: :unprocessable_entity
+        render_errors(@complaint.errors)
       end
     end
 
-    # DELETE /complaints/1
     def destroy
       @complaint.destroy
     end
 
-    private 
+    private
+
+    def search_params
+      params.require(:q).permit!
+    end
 
     def set_complaint
       @complaint = Complaint.find(params[:id])
@@ -49,6 +56,5 @@ module Api::V1
     def complaint_params
       params.require(:complaint).permit(:title, :description, :company, locale: [:city, :state])
     end
-
   end
 end

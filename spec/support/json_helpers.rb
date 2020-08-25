@@ -2,13 +2,16 @@ module JsonHelpers
   def json(response)
     JSON.parse(response.body)
   end
-end
 
-# # spec/support/request_helpers.rb
-# module Requests
-#   module JsonHelpers
-#     def json
-#       JSON.parse(response.body)
-#     end
-#   end
-# end
+  def json_data(response)
+    json(response)['data']
+  end
+
+  def json_meta(response)
+    json(response)['meta']
+  end
+
+  def json_errors(response)
+    json(response)['errors']
+  end
+end

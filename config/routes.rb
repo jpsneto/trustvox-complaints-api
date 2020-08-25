@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   
   namespace :api do
     namespace :v1 do
-      resources :complaints, only: [:index, :show, :create, :update, :destroy]
+      resources :complaints, only: [:index, :show, :create, :update, :destroy] do 
+        get :count, on: :collection
+      end
     end
   end
 end

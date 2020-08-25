@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :complaint do 
-    title { "Pedido atrasado" }
-    description { "Meu pedido esta atrasado e nao recebi nem ao menos o codigo de rastreio" } 
-    company { "Europeias" }
+    title { Faker::Lorem.sentence(word_count: 3) }
+    description { Faker::Lorem.paragraph }
+    company { Faker::Company.name }
     locale { build(:locale) }
 
     trait :invalid do 
