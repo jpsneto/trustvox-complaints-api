@@ -1,0 +1,32 @@
+Quantas reclamacoes uma Empresa tem em determinada cidade
+quantas reclamacoes uma empresa tem em determinado estado
+
+Reclamacoes da Bahia
+/api/v1/state/bahia/?company=Empresa
+
+Reclamacoes de Ilheus Bahia
+/api/v1/state/bahia/city/Ilheus?company=Empresa
+
+
+Quantas reclamacoes uma Empresa tem em determinada cidade
+api/v1/complaints/count?company=Oistate=BAcity=Ilheus
+{
+  count: 10
+}
+
+quantas reclamacoes uma empresa tem em determinado estado
+api/v1/complaints/count?company=Oistate=BA
+{
+  count: 1027
+}
+
+
+Ranking
+Empresas mais reclamadas
+Empresas mais reclamadas na cidade
+Empresas mais reclamadas no estado
+api/v1/complaints/companies_ranking?state=BA
+api/v1/complaints/companies_ranking?state=BA&city=Ilheus
+
+Complaint.where(params).map {|c| c.locale.state}.tally.max_by {|k,v| v}
+

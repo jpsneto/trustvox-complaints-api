@@ -7,16 +7,20 @@ Trustvox - Backend Engineer Challenge
 ## System dependencies
 mongodb
 
-## Deployment with docker
+## Run on Docker
+To start up the application in your local Docker environment:
+
 ```
 git clone git@github.com:jpsneto/trustvox-complaints-api.git
 cd trustvox-complaints-api
+docker-compose build
 docker-compose up -d
 ```
 
 ### Optinal seed data (creates 1000 sample complaints)
 ```
 docker-compose exec app bundle exec rake db:seed 
+curl -X GET "localhost:3000/api/v1/complaints/count" -H  "accept: application/json"
 ```
 
 
