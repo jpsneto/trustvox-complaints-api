@@ -172,7 +172,7 @@ test:
     default:
       database: trustvox_complaints_api_test
       hosts:
-        - localhost:27017
+        - mongo-service:27017
       options:
         read:
           mode: :primary

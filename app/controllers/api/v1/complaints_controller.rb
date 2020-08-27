@@ -18,7 +18,7 @@ module Api::V1
     # e.g Five Submarino complaints in Salvador, BA
     def count
       @complaints = Complaint.where(search_params)
-      render json: {data: @complaints.count}
+      render json: { data: @complaints.count }
     end
 
     def create

@@ -37,23 +37,77 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Complaint'
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Complaint'
+                  meta:
+                    type: object
+                    $ref: '#/components/schemas/Meta'
     post:
       tags:
         - complaints
       summary: Create a complaint
       operationId: createComplaint
       responses:
-        '405':
-          description: Invalid input
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Complaint'          
+          
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/ApiErrorResponse'
       security:
         - petstore_auth:
             - 'write:pets'
             - 'read:pets'
       requestBody:
         $ref: '#/components/requestBodies/Complaint'
+  /complaints/count:
+    get:
+      tags:
+        - complaints
+      summary: Retrive count complaints. Useful for research with query criteria
+      operationId: countComplaints
+      parameters:
+      - in: query
+        name: q[company]
+        description: company filter      
+        schema:
+          type: string
+      - in: query
+        name: q[locale.city]
+        description: Complaint city      
+        schema:
+          type: string
+      - in: query
+        name: q[locale.state]
+        description: Complaint state
+        schema:
+          type: string                    
+      responses:
+        '200':
+          description: Count query Complaints
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      count: 
+                        type: integer  
   /complaints/{id}:
     get:
       tags:
@@ -133,7 +187,7 @@ components:
           example: Sem Sinal wifi e Televisão
         description: 
           type: string
-          example: Faz dias que o serviço Net, contratado não funciona. Os canais de TV caem, instáveis o tempo todo. Ficamos sem o serviço várias vezes por dia. A rede wifi, também, não corresponde
+          example: Faz dias que o serviço Net, contratado não funciona. Os canais de TV caem
         company:
           type: string
           example: Rede
@@ -151,16 +205,32 @@ components:
         state:
           type: string
           example: BA
-    ApiResponse:
+    ApiErrorResponse:
       type: object
       properties:
-        code:
+        errors:
+          type: object
+          properties:
+            field_name:
+              type: array
+              items:
+                type: string
+                example: can't be blank
+    Meta:
+      type: object
+      properties:
+        total: 
           type: integer
-          format: int32
-        type:
-          type: string
-        message:
-          type: string
+          example: 100
+        page:
+          type: object
+          properties:
+            number: 
+              type: integer
+              example: 2
+            size: 
+              type: integer
+              example: 25
   requestBodies:
     Complaint:
       content:

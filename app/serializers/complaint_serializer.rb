@@ -1,3 +1,3 @@
 class ComplaintSerializer < BaseSerializer
-  attributes :title, :description, :company, :locale
+  attributes :title, :description, :company
 end
