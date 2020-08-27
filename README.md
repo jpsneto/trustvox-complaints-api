@@ -8,7 +8,8 @@ Trustvox - Backend Engineer Challenge
 mongodb
 
 ## Deployment with docker
-```git clone git@github.com:jpsneto/trustvox-complaints-api.git
+```
+git clone git@github.com:jpsneto/trustvox-complaints-api.git
 cd trustvox-complaints-api
 docker-compose up -d
 ```
@@ -18,7 +19,6 @@ docker-compose up -d
 docker-compose exec app bundle exec rake db:seed 
 ```
 
-Open browser on localhost:3000
 
 ## Api doc and try out
-[https://app.swaggerhub.com/apis-docs/jpsneto/trustvox-complaints-api/1.0.0]
+https://app.swaggerhub.com/apis-docs/jpsneto/trustvox-complaints-api/1.0.0
