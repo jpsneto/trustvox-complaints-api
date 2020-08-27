@@ -20,7 +20,7 @@ docker-compose up -d
 ### Optinal seed data (creates 1000 sample complaints)
 ```
 docker-compose exec app bundle exec rake db:seed 
-curl -X GET "localhost:3000/api/v1/complaints/count" -H  "accept: application/json"
+curl -X GET "localhost:3000/api/v1/complaints" -H  "accept: application/json"
 ```
 
 
