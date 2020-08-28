@@ -1,6 +1,8 @@
 # trustvox-compliants-api
 [Trustvox - Backend Engineer Challenge](https://gist.github.com/cleytonmessias/6098d0747743620dfc58f977a8f1ded7)
 
+This API provides a service capable of receiving consumer complaints and retrieving them for research purposes, such as locale information
+
 ## Run on Docker
 To start up the application in your local Docker environment:
 
