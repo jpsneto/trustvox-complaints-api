@@ -3,7 +3,7 @@ module Api::V1
     before_action :set_complaint, only: [:show, :update, :destroy]
 
     def index
-      @complaints = Complaint.all.page(params[:page])
+      @complaints = Complaint.where(search_params).page(params[:page])
       render_object(@complaints)
     end
 
@@ -45,7 +45,10 @@ module Api::V1
 
     private
 
+    # Parse query param "q"
+    # Return the hash of criteria or an empty hash the represents "no criteria"
     def search_params
+      return {} unless params[:q]
       params.require(:q).permit!
     end
 

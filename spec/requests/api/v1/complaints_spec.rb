@@ -15,7 +15,7 @@ RSpec.describe "Api::V1::Complaints", type: :request do
       expect(json(response)["data"].count).to eq(3) # TODO: remove root "complaints"
     end
 
-    it 'has page metadata in response' do 
+    it 'has page metadata in response' do
       expected_meta = {"total" => 3, "page" => {"number" => 1, "size" => 25} }
       expect(json(response)["meta"]).to include(expected_meta) # TODO: remove root "complaints"
     end
@@ -24,8 +24,18 @@ RSpec.describe "Api::V1::Complaints", type: :request do
 
   end
 
+  describe "GET api/v1/complaints?{query}" do
+    it 'returns some complaints when query params assigned' do
+      complaints = create_list(:complaint, 3, company: 'Submarino', locale: { state: 'BA', city: 'Salvador' })
+      params = { 'q' => { 'company' => 'Submarino', 'locale.state' => 'BA', 'locale.city' => 'Salvador' } }
+
+      get api_v1_complaints_path, params: params
+      expect(json(response)["data"].count).to eq(complaints.size)
+    end
+  end
+
   describe 'GET api/v1/complaints/{:id}' do
-    it "retrive a complaint" do
+    it "retrives a complaint" do
       complaint = create(:complaint)
       get api_v1_complaint_path(complaint.id)
       expect(json(response)["id"]).to eq(complaint.id.to_s)
@@ -37,10 +47,10 @@ RSpec.describe "Api::V1::Complaints", type: :request do
     end
   end
 
-  describe 'GET ap1/v1/complaints/count?query' do
+  describe 'GET ap1/v1/complaints/count?{query}' do
     it 'Counts complaints from a specific company in specific state and city' do
       create_list(:complaint, 3, company: 'Submarino', locale: {state: 'BA', city: 'Salvador'})
-      params = {"q" => {"company" => "Submarino",  "locale.state" => "BA", "locale.city" => "Salvador" } }
+      params = {"q" => {"company" => "Submarino", "locale.state" => "BA", "locale.city" => "Salvador" } }
 
       get count_api_v1_complaints_path, params: params
 
