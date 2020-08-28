@@ -45,13 +45,6 @@ module Api::V1
 
     private
 
-    # Parse query param "q"
-    # Return the hash of criteria or an empty hash the represents "no criteria"
-    def search_params
-      return {} unless params[:q]
-      params.require(:q).permit!
-    end
-
     def set_complaint
       @complaint = Complaint.find(params[:id])
     end
