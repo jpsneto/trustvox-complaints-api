@@ -1,5 +1,5 @@
 # trustvox-compliants-api
-Trustvox - Backend Engineer Challenge (gist)[https://gist.github.com/cleytonmessias/6098d0747743620dfc58f977a8f1ded7]
+[Trustvox - Backend Engineer Challenge](https://gist.github.com/cleytonmessias/6098d0747743620dfc58f977a8f1ded7)
 
 ## Run on Docker
 To start up the application in your local Docker environment:
