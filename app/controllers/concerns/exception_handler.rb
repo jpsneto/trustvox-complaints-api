@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ExceptionHandler
   extend ActiveSupport::Concern
 
@@ -14,7 +15,8 @@ module ExceptionHandler
     render json: { status: status_code(:bad_request), error: exception.message }, status: :bad_request
   end
 
-  private 
+  private
+
   def status_code(status)
     Rack::Utils::SYMBOL_TO_STATUS_CODE[status]
   end

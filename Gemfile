@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -38,7 +39,7 @@ end
 
 group :test do
   gem 'mongoid-rspec'
-  gem 'factory_bot_rails'#, '~> 4.0'
+  gem 'factory_bot_rails' # , '~> 4.0'
   gem 'shoulda-matchers', '~> 4.0'
   gem 'faker'
   gem 'database_cleaner'

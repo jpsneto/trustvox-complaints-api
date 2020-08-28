@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe ComplaintSerializer, type: :serializer do 
+RSpec.describe ComplaintSerializer, type: :serializer do
   let(:complaint) { FactoryBot.create(:complaint) }
   let(:serialized_complaint) { described_class.new(complaint).as_json }
 
@@ -25,5 +26,4 @@ RSpec.describe ComplaintSerializer, type: :serializer do
   it 'has a state in locale that matches with the locale state' do
     expect(subject[:locale][:state]).to eq(complaint.locale.state)
   end
-
 end

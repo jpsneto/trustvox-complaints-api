@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Complaint
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -15,5 +16,4 @@ class Complaint
   validates :company, presence: true
 
   search_in :title, :description, :company, locale: [:city, :state]
-
 end

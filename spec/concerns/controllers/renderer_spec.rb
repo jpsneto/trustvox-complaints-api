@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # require 'rails_helper'
 
 # RSpec.describe Renderer, type: :controller do
@@ -31,9 +32,9 @@
 #   end
 
 #   # before do
-#   #   routes.draw { 
+#   #   routes.draw {
 #   #     get :action, to: "api/v1/anonymous#show"
-#   #   }    
+#   #   }
 #   # end
 
 #   #testar se o collection e o objeto renderizam corretamente
@@ -52,13 +53,10 @@
 #     end
 #   end
 
-#   describe 'POST create' do 
+#   describe 'POST create' do
 #     it 'renders resource errors with render_errors method' do
-      
-      
+
 #     end
 #   end
 
-
 # end
-

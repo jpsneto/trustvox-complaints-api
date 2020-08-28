@@ -1,8 +1,9 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe BaseSerializer, type: :serializer do
-  let(:resource) {FactoryBot.create(:complaint)}
-  let(:serialized_resource) {described_class.new(resource).as_json}
+  let(:resource) { FactoryBot.create(:complaint) }
+  let(:serialized_resource) { described_class.new(resource).as_json }
 
   subject { serialized_resource[:base] }
 
@@ -13,5 +14,4 @@ RSpec.describe BaseSerializer, type: :serializer do
   it 'has a creted date time of the resource' do
     expect(subject[:created_at]).to eq(resource.created_at)
   end
-
 end

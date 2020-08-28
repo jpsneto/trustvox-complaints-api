@@ -1,13 +1,12 @@
-FactoryBot.define do 
+# frozen_string_literal: true
+FactoryBot.define do
   factory :locale do
-   city { "Ilheus" }
-   state { "BA" }
+    city { "Ilheus" }
+    state { "BA" }
 
-   trait :invalid do
-     city { nil }
-     state { nil }
-   end
-  
-
+    trait :invalid do
+      city { nil }
+      state { nil }
+    end
   end
 end

@@ -1,10 +1,13 @@
+# frozen_string_literal: true
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  
+
   namespace :api do
     namespace :v1 do
-      resources :complaints, only: [:index, :show, :create, :update, :destroy] do 
-        get :count, on: :collection
+      resources :complaints, only: [:index, :show, :create, :update, :destroy] do
+        collection do
+          get :count
+        end
       end
     end
   end

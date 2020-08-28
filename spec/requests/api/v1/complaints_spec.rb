@@ -1,12 +1,12 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe "Api::V1::Complaints", type: :request do
- 
-  let(:valid_attributes) { FactoryBot.attributes_for(:complaint)}
+  let(:valid_attributes) { FactoryBot.attributes_for(:complaint) }
   let(:invalid_attributes) { FactoryBot.attributes_for(:complaint, :invalid) }
 
   describe "GET api/v1/complaints" do
-    before do 
+    before do
       create_list(:complaint, 3)
       get api_v1_complaints_path, as: :json
     end
@@ -16,12 +16,11 @@ RSpec.describe "Api::V1::Complaints", type: :request do
     end
 
     it 'has page metadata in response' do
-      expected_meta = {"total" => 3, "page" => {"number" => 1, "size" => 25} }
+      expected_meta = { "total" => 3, "page" => { "number" => 1, "size" => 25 } }
       expect(json(response)["meta"]).to include(expected_meta) # TODO: remove root "complaints"
     end
 
     it { expect(response).to have_http_status(:ok) }
-
   end
 
   describe "GET api/v1/complaints?{query}" do
@@ -49,8 +48,8 @@ RSpec.describe "Api::V1::Complaints", type: :request do
 
   describe 'GET ap1/v1/complaints/count?{query}' do
     it 'Counts complaints from a specific company in specific state and city' do
-      create_list(:complaint, 3, company: 'Submarino', locale: {state: 'BA', city: 'Salvador'})
-      params = {"q" => {"company" => "Submarino", "locale.state" => "BA", "locale.city" => "Salvador" } }
+      create_list(:complaint, 3, company: 'Submarino', locale: { state: 'BA', city: 'Salvador' })
+      params = { "q" => { "company" => "Submarino", "locale.state" => "BA", "locale.city" => "Salvador" } }
 
       get count_api_v1_complaints_path, params: params
 
@@ -60,9 +59,8 @@ RSpec.describe "Api::V1::Complaints", type: :request do
 
   describe "POST api/v1/complaints" do
     context "with valid parameters" do
-
       before do
-        post api_v1_complaints_path, params: {complaint: valid_attributes}, as: :json
+        post api_v1_complaints_path, params: { complaint: valid_attributes }, as: :json
       end
 
       it "create a new complaint" do
@@ -80,12 +78,11 @@ RSpec.describe "Api::V1::Complaints", type: :request do
     end
 
     context "with invalid paramaters" do
-
       before do
-        post api_v1_complaints_path, params: {complaint: invalid_attributes}, as: :json
+        post api_v1_complaints_path, params: { complaint: invalid_attributes }, as: :json
       end
 
-      it "does not create a new complaint" do 
+      it "does not create a new complaint" do
         expect change(Complaint, :count).by(0)
       end
 
@@ -95,13 +92,11 @@ RSpec.describe "Api::V1::Complaints", type: :request do
       end
 
       # TODO: Test response body
-
     end
   end
 
   describe "PATCH api/v1/complaints/{:id}" do
     let(:complaint) { create(:complaint, valid_attributes) }
-    
 
     context "with valid parameters" do
       it "update the requested complaint" do
@@ -113,9 +108,9 @@ RSpec.describe "Api::V1::Complaints", type: :request do
     end
 
     context "with invalid parameters" do
-      it "does not update the requested complaint" do         
+      it "does not update the requested complaint" do
         patch api_v1_complaint_path(complaint), params: invalid_attributes, as: :json
-        expect(response).to have_http_status(:unprocessable_entity)        
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
 
@@ -132,5 +127,4 @@ RSpec.describe "Api::V1::Complaints", type: :request do
     delete api_v1_complaint_path(complaint)
     expect(response).to have_http_status(:no_content)
   end
-
 end
