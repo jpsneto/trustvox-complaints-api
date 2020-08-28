@@ -13,8 +13,6 @@ services:
       - .:/app
       - gem_cache:/usr/locale/bundle/gems
     env_file: .env
-    environment: 
-      RAILS_ENV: development
   
   mongo-service:
     image: "mongo:4.4.0"
