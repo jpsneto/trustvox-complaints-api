@@ -1,13 +1,9 @@
-language: ruby
-cache: 
-  - bundler
-rvm:
-  - 2.7.1
 services:
-  - mongodb
+  - docker
 before_script:
-  - bundle install --jobs=3 --retry=3
+  - docker-compose build
 script:
-  - bundle exec rspec spec
+  - docker-compose run --entrypoint="bundle exec rspec spec" --rm app
+
 
 
