@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jpsneto/trustvox-complaints-api.svg?branch=master)](https://travis-ci.org/jpsneto/trustvox-complaints-api)
+
 # trustvox-compliants-api
 [Trustvox - Backend Engineer Challenge](https://gist.github.com/cleytonmessias/6098d0747743620dfc58f977a8f1ded7)
 
