@@ -1,11 +1,7 @@
-# trustvox_compliants_api
-Trustvox - Backend Engineer Challenge
+# trustvox-compliants-api
+[Trustvox - Backend Engineer Challenge](https://gist.github.com/cleytonmessias/6098d0747743620dfc58f977a8f1ded7)
 
-## Ruby version
-2.7
-
-## System dependencies
-mongodb
+This API provides a service capable of receiving consumer complaints and retrieving them for research purposes, such as locale information
 
 ## Run on Docker
 To start up the application in your local Docker environment:
@@ -23,6 +19,32 @@ docker-compose exec app bundle exec rake db:seed
 curl -X GET "localhost:3000/api/v1/complaints" -H  "accept: application/json"
 ```
 
+## Run on local machine
+### System dependencies
+Ruby 2.7
+MongoDB 4.4 
 
-## Api doc and try out
+### Run application
+```
+git clone git@github.com:jpsneto/trustvox-complaints-api.git
+cd trustvox-complaints-api
+gem install bundler:2.1.4
+bundle install
+```
+Optinal seed data (creates 1000 sample complaints)
+```
+bundle exec rake db:seed
+```
+Start application
+
+```
+bundle exec rails s
+```
+### Run test suite
+```
+bundle exec rspec spec
+```
+
+
+## API doc
 https://app.swaggerhub.com/apis-docs/jpsneto/trustvox-complaints-api/1.0.0
