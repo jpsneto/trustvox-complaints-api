@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/jpsneto/trustvox-complaints-api.svg?branch=master)](https://travis-ci.org/jpsneto/trustvox-complaints-api)
-
+[![Maintainability](https://api.codeclimate.com/v1/badges/e4582f46fe968f789438/maintainability)](https://codeclimate.com/github/jpsneto/trustvox-complaints-api/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage)](https://codeclimate.com/github/codeclimate/codeclimate/test_coverage)
 # trustvox-compliants-api
 [Trustvox - Backend Engineer Challenge](https://gist.github.com/cleytonmessias/6098d0747743620dfc58f977a8f1ded7)
 
